@@ -10,7 +10,7 @@ import pickle
 
 
 # Load model
-with open('knn_penguin.pkl', 'rb') as file:
+with open('knn_car.pkl', 'rb') as file:
     model, species_encoder, island_encoder, sex_encoder = pickle.load(file)
 
 # Streamlit app
