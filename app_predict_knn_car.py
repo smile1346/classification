@@ -4,7 +4,6 @@ import pickle
 import pandas as pd
 
 # Load the pre-trained model and encoders
-@st.cache(allow_output_mutation=True)
 def load_model():
     with open('knn_car.pkl', 'rb') as file:
         model, buying_encoder, maint_encoder, doors_encoder, persons_encoder, lug_boot_encoder, safety_encoder, class_encode = pickle.load(file)
@@ -13,7 +12,7 @@ def load_model():
 model, buying_encoder, maint_encoder, doors_encoder, persons_encoder, lug_boot_encoder, safety_encoder, class_encode = load_model()
 
 # Define a function to make predictions
-def predict_species(buying, maint, doors, persons, lug_boot, safety):
+def predict_class(buying, maint, doors, persons, lug_boot, safety):
     x_new = pd.DataFrame({
         'buying': [buying],
         'maint': [maint],
@@ -49,5 +48,5 @@ lug_boot = st.selectbox('Luggage Boot Size:', ['small', 'med', 'big'])
 safety = st.selectbox('Safety Level:', ['low', 'med', 'high'])
 
 if st.button('Predict'):
-    prediction = predict_species(buying, maint, doors, persons, lug_boot, safety)
+    prediction = predict_class(buying, maint, doors, persons, lug_boot, safety)
     st.write(f'Predicted Class: {prediction}')
