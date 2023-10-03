@@ -2,12 +2,17 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import os
+
+# Get the absolute path to the pickle file
+pickle_file_path = os.path.join(os.path.dirname(__file__), 'knn_car.pkl')
 
 # Load the pre-trained model and encoders
 def load_model():
-    with open('knn_car.pkl', 'rb') as file:
+    with open(pickle_file_path, 'rb') as file:
         model, buying_encoder, maint_encoder, doors_encoder, persons_encoder, lug_boot_encoder, safety_encoder, class_encode = pickle.load(file)
     return model, buying_encoder, maint_encoder, doors_encoder, persons_encoder, lug_boot_encoder, safety_encoder, class_encode
+
 
 model, buying_encoder, maint_encoder, doors_encoder, persons_encoder, lug_boot_encoder, safety_encoder, class_encode = load_model()
 
